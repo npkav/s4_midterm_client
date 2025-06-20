@@ -11,6 +11,13 @@ public class InputHelper {
             System.out.print("Invalid input. " + prompt);
             scanner.next();
         }
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine(); // consume leftover newline
+        return input;
+    }
+
+    public static String getStringInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
     }
 }
