@@ -1,5 +1,6 @@
 package org.cli.menu;
 
+import org.cli.logic.FeedbackService;
 import org.cli.util.InputHelper;
 
 public class FeedbackMenu {
@@ -17,10 +18,19 @@ public class FeedbackMenu {
             int choice = InputHelper.getIntInput("Enter your choice: ");
 
             switch (choice) {
-                case 1 -> System.out.println("Viewing all feedback entries..."); // TODO: Implement logic to view all feedback entires
-                case 2 -> System.out.println("Viewing ratings for a specific rep..."); // TODO: Implement logic to view ratings for a specific rep
-                case 3 -> System.out.println("Calculating average score..."); // TODO: Implement logic for average rating of a rep
-                case 4 -> System.out.println("Filtering feedback by rating..."); // TODO: Implement feedback filter logic; i.e. filter by rating 1-5
+                case 1 -> FeedbackService.getAllFeedback();
+                case 2 -> {
+                    int repID = InputHelper.getIntInput("Please enter the rep's ID: ");
+                    FeedbackService.getFeedbackByRep((long) repID);
+                }
+                case 3 -> {
+                    int repID = InputHelper.getIntInput("Please enter the rep's ID: ");
+                    FeedbackService.getAverageRatingByRep((long) repID);
+                }
+                case 4 -> {
+                    int rating = InputHelper.getIntInput("Enter rating (1-5): ");
+                    FeedbackService.getFeedbackByRating(rating);
+                }
                 case 5 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");
             }

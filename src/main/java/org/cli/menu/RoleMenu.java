@@ -1,5 +1,6 @@
 package org.cli.menu;
 
+import org.cli.logic.RoleService;
 import org.cli.util.InputHelper;
 
 public class RoleMenu {
@@ -17,10 +18,16 @@ public class RoleMenu {
             int choice = InputHelper.getIntInput("Enter your choice: ");
 
             switch (choice) {
-                case 1 -> System.out.println("Viewing all roles..."); // TODO: Implement logic to list all roles
-                case 2 -> System.out.println("Viewing all departments..."); // TODO: Implement logic to list all departments
-                case 3 -> System.out.println("Viewing reps under a role..."); // TODO: Implement logic to list reps under a specific role
-                case 4 -> System.out.println("Viewing reps under a department..."); // TODO: Implement logic to list reps in a specific department
+                case 1 -> RoleService.getAllRoles();
+                case 2 -> RoleService.getAllDepartments();
+                case 3 -> {
+                    int roleID = InputHelper.getIntInput("Please enter the role ID: ");
+                    RoleService.getRepsByRole((long) roleID);
+                }
+                case 4 -> {
+                    int departmentID = InputHelper.getIntInput("Please enter the department ID: ");
+                    RoleService.getRepsByDepartment((long) departmentID);
+                }
                 case 5 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");
             }

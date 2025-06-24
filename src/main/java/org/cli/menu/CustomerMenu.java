@@ -1,9 +1,7 @@
 package org.cli.menu;
 
-import java.util.List;
-
 import org.cli.logic.CustomerService;
-import org.cli.model.Customer;
+import org.cli.logic.IssueService;
 import org.cli.util.InputHelper;
 
 public class CustomerMenu {
@@ -21,30 +19,15 @@ public class CustomerMenu {
             int choice = InputHelper.getIntInput("Enter your choice: ");
 
             switch (choice) {
-                case 1 -> {
-                    List<Customer> customers = CustomerService.getAllCustomers();
-                        if (customers.isEmpty()) {
-                            System.out.println("No customers found.");
-                        } else {
-                            for (Customer c : customers) {
-                                System.out.println(c);
-                            }
-                        }
-                    }
-                case 2 -> System.out.println("Viewing all issues..."); // TODO: Implement logic to view all issues
-                case 3 -> System.out.println("Viewing issues by customer..."); // TODO: Implement logic to view issues by a specific customer
+                case 1 -> CustomerService.getAllCustomers();
+                case 2 -> IssueService.getAllIssues();
+                case 3 -> {
+                    Long customerID = InputHelper.getLongInput("Enter customer ID: ");
+                    IssueService.getIssuesByCustomer(customerID);
+                }
                 case 4 -> {
                     String name = InputHelper.getStringInput("Enter customer name to search: ");
-                    List<Customer> results = CustomerService.searchByName(name);
-
-                    if (results.isEmpty()) {
-                        System.out.println("No customers found matching \"" + name + "\".");
-                    } else {
-                        System.out.println("Matching customers:");
-                        for (Customer c : results) {
-                            System.out.println(c);
-                        }
-                    }
+                    CustomerService.searchByName(name);
                 }
                 case 5 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");

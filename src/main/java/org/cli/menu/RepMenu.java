@@ -1,5 +1,6 @@
 package org.cli.menu;
 
+import org.cli.logic.RepService;
 import org.cli.util.InputHelper;
 
 public class RepMenu {
@@ -17,10 +18,47 @@ public class RepMenu {
             int choice = InputHelper.getIntInput("Enter your choice: ");
 
             switch (choice) {
-                case 1 -> System.out.println("Viewing all service reps..."); // TODO: Implement logic to view all reps
-                case 2 -> System.out.println("Viewing issues assigned to a rep..."); // TODO: Implement logic to view rep's issues
-                case 3 -> System.out.println("Filtering reps by department/role..."); // TODO: Implement logic to filter by department/role
-                case 4 -> System.out.println("Searching rep by name..."); // TODO: Implement search rep by name logic
+                case 1 -> RepService.viewAllReps();
+                case 2 -> {
+                    int repID = InputHelper.getIntInput("Please enter the rep's ID: ");
+                    RepService.viewIssuesForRep((long) repID);
+                }
+                case 3 -> {
+                    System.out.println("What would you like to filter by?");
+                    System.out.println("1) Department");
+                    System.out.println("2) Role");
+                    System.out.println("3) Both");
+                    System.out.println("4) Cancel");
+                    int filterChoice = InputHelper.getIntInput("Enter your choice: ");
+
+                    switch (filterChoice) {
+                        case 1 -> {
+                            RepService.getAllDepartments();
+                            int deptChoice = InputHelper.getIntInput("Please enter department ID: ");
+                            RepService.filterRepsByDepartment((long) deptChoice);
+                        }
+                        case 2 -> {
+                            RepService.getAllRoles();
+                            int roleChoice = InputHelper.getIntInput("Please enter role ID: ");
+                            RepService.filterRepsByRole((long) roleChoice);
+                        }
+                        case 3 -> {
+                            RepService.getAllDepartments();
+                            int deptChoice = InputHelper.getIntInput("Please enter department ID: ");
+                            
+                            RepService.getAllRoles();
+                            int roleChoice = InputHelper.getIntInput("Please enter role ID: ");
+                            
+                            RepService.filterRepsByDepartmentAndRole((long) deptChoice, (long) roleChoice);
+                        }
+                        case 4 -> { return; }
+                        default -> System.out.println("Invalid input, please try again.");
+                    }
+                }
+                case 4 -> {
+                    String repName = InputHelper.getStringInput("Enter rep name to search: ");
+                    RepService.searchRepByName(repName);
+                }
                 case 5 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");
             }
