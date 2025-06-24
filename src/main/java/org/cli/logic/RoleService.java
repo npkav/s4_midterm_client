@@ -16,15 +16,15 @@ public class RoleService {
         System.out.println(response);
     }
 
-    public static void getRepsByRole(String role) {
-        String response = API_Client.get("/reps/role?role=" + role);
-        System.out.println("VIEWING REPS UNDER ROLE: " + role);
+    public static void getRepsByRole(Long roleID) {
+        String response = API_Client.get("/roles/" + roleID + "/reps");
+        System.out.println("VIEWING REPS UNDER ROLE ID: " + roleID);
         System.out.println(response);
     }
 
-    public static void getRepsByDepartment(String department) {
-        String response = API_Client.get("/reps/department?department=" + department);
-        System.out.println("VIEWING REPS UNDER DEPARTMENT: " + department);
+    public static void getRepsByDepartment(Long departmentID) {
+        String response = API_Client.get("/departments/" + departmentID + "/reps");
+        System.out.println("VIEWING REPS UNDER DEPARTMENT ID: " + departmentID);
         System.out.println(response);
     }
 }
