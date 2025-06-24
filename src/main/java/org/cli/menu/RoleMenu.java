@@ -21,12 +21,12 @@ public class RoleMenu {
                 case 1 -> RoleService.getAllRoles();
                 case 2 -> RoleService.getAllDepartments();
                 case 3 -> {
-                    String role = InputHelper.getStringInput("Enter the role name: ");
-                    RoleService.getRepsByRole(role);
+                    int roleID = InputHelper.getIntInput("Please enter the role ID: ");
+                    RoleService.getRepsByRole((long) roleID);
                 }
                 case 4 -> {
-                    String department = InputHelper.getStringInput("Enter the department name: ");
-                    RoleService.getRepsByDepartment(department);
+                    int departmentID = InputHelper.getIntInput("Please enter the department ID: ");
+                    RoleService.getRepsByDepartment((long) departmentID);
                 }
                 case 5 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");
