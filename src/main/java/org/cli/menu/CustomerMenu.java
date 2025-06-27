@@ -14,7 +14,8 @@ public class CustomerMenu {
             System.out.println("2. View all issues");
             System.out.println("3. View issues reported by a specific customer");
             System.out.println("4. Search customer by name");
-            System.out.println("5. Return to main menu");
+            System.out.println("5. Compose Issue on Behalf of Customer");
+            System.out.println("6. Return to main menu");
 
             int choice = InputHelper.getIntInput("Enter your choice: ");
 
@@ -29,7 +30,8 @@ public class CustomerMenu {
                     String name = InputHelper.getStringInput("Enter customer name to search: ");
                     CustomerService.searchByName(name);
                 }
-                case 5 -> { return; }
+                case 5 -> IssueService.createIssue();
+                case 6 -> { return; }
                 default -> System.out.println("Invalid input, please try again.");
             }
         }
