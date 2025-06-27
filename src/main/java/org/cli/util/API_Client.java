@@ -36,4 +36,6 @@ public class API_Client {
 
     public static String get(String endpoint) {return sendRequest(endpoint, "GET", null);}
     public static String post(String endpoint, String json) {return sendRequest(endpoint, "POST", json);}
+    public static String put(String endpoint, String json) {return sendRequest(endpoint, "PUT", json);}
+    public static void delete(String endpoint) {sendRequest(endpoint, "DELETE", null);}
 } 
