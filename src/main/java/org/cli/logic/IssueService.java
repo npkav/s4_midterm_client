@@ -22,11 +22,11 @@ public class IssueService {
         Long customerID = InputHelper.getLongInput("CUSTOMER ID: ");
         String title = InputHelper.getStringInput("ISSUE TITLE: ");
         String description = InputHelper.getStringInput("ISSUE DESCRIPTION: ");
-        String priority = InputHelper.getStringInput("ISSUE PRIORITY: ");
+        String priority = InputHelper.getStringInput("ISSUE PRIORITY (HIGH, MEDIUM, LOW): ");
         if (priority.equalsIgnoreCase("high")) {priority = "HIGH";}
         else if (priority.equalsIgnoreCase("medium")) {priority = "MEDIUM";}
         else if (priority.equalsIgnoreCase("low")) {priority = "LOW";}
-        else {priority = "INVALID PRIORITY: " + priority; return;}
+        else {priority = "INV";}
 
         String json = String.format("{\"customerID\":%d,\"title\":\"%s\",\"description\":\"%s\",\"status\":\"Open\",\"priority\":\"%s\"}",
                                     customerID, title, description, priority);
